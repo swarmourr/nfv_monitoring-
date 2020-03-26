@@ -1,9 +1,0 @@
-Flask
-flask-restplus
-pyaml
-requests
-ConfigParser
-apscheduler
-Flask-APScheduler
-scp
-ast
