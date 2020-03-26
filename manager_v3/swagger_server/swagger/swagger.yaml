@@ -1,0 +1,722 @@
+---
+swagger: "2.0"
+info:
+  description: "AGENTS MONITORING MANAGER "
+  version: "1.0.0"
+  title: "MONITORING MANAGER"
+  contact:
+    name: "Hamza SAFRI"
+    email: "hsafri@laas.fr"
+host: "localhost:8888"
+basePath: "/swarmourr/manger/1.0.0"
+tags:
+- name: "VNFManager"
+  description: "Ressources for the management of virtual machines and docker containers\
+    \ agents"
+- name: "ANFManager"
+  description: "Ressources for the management of applicatif agents"
+- name: "sensor"
+  description: "Resources to inter-communicate among components"
+schemes:
+- "https"
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /ANFManager:
+    post:
+      tags:
+      - "ANFManager"
+      summary: "Add new applicatif  monitoring agent"
+      operationId: "add_agent_anf"
+      parameters:
+      - in: "body"
+        name: "payload"
+        required: true
+        schema:
+          $ref: "#/definitions/osgi_model_jvm"
+      responses:
+        "200":
+          description: "Agent added correctly"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "Agent not added"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.anf_manager_controller"
+    put:
+      tags:
+      - "ANFManager"
+      summary: "Update the configuration of an applicatif agent"
+      operationId: "update_agent_anf"
+      parameters:
+      - in: "body"
+        name: "payload"
+        required: true
+        schema:
+          $ref: "#/definitions/osgi_model_jvm"
+      responses:
+        "200":
+          description: "Agent updated correctly"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "Agent not updated"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.anf_manager_controller"
+    delete:
+      tags:
+      - "ANFManager"
+      summary: "Stop and delete applicatif  monitoring agent"
+      operationId: "delete_agent"
+      parameters:
+      - in: "body"
+        name: "payload"
+        required: true
+        schema:
+          $ref: "#/definitions/osgi_host"
+      responses:
+        "200":
+          description: "Agent deleted correctly"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "Agent not deleted"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.anf_manager_controller"
+  /ANFManager/disable:
+    put:
+      tags:
+      - "ANFManager"
+      summary: "Stop an applicatif  monitoring agent"
+      operationId: "disable_agent"
+      parameters:
+      - in: "body"
+        name: "payload"
+        required: true
+        schema:
+          $ref: "#/definitions/osgi_host"
+      responses:
+        "200":
+          description: "Agent disabled correctly"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "Agent not disabled"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.anf_manager_controller"
+  /ANFManager/enable:
+    put:
+      tags:
+      - "ANFManager"
+      summary: "Start an applicatif monitoring agent"
+      operationId: "enable_agent"
+      parameters:
+      - in: "body"
+        name: "payload"
+        required: true
+        schema:
+          $ref: "#/definitions/osgi_host"
+      responses:
+        "200":
+          description: "Agent enabled correctly"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "Agent not enabled"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.anf_manager_controller"
+  /VNFManager:
+    post:
+      tags:
+      - "VNFManager"
+      summary: "Add new VM and CNT monitoring agent"
+      operationId: "add_agent_vnf"
+      parameters:
+      - in: "body"
+        name: "payload"
+        required: true
+        schema:
+          $ref: "#/definitions/admin_model_system"
+      responses:
+        "200":
+          description: "Agent added correctly"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "Agent not added"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.vnf_manager_controller"
+    put:
+      tags:
+      - "VNFManager"
+      summary: "Update the configuration of a VM and CNT agent"
+      operationId: "update_agent_vnf"
+      parameters:
+      - in: "body"
+        name: "payload"
+        required: true
+        schema:
+          $ref: "#/definitions/update_model_vnf"
+      responses:
+        "200":
+          description: "Agent deleted correctly"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "Agent not deleted"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.vnf_manager_controller"
+    delete:
+      tags:
+      - "VNFManager"
+      summary: "Stop and delete VM AND CNT monitoring agent"
+      operationId: "delete_agent_vnf"
+      parameters:
+      - in: "body"
+        name: "payload"
+        required: true
+        schema:
+          $ref: "#/definitions/delete_agent"
+      responses:
+        "200":
+          description: "Agent deleted correctly"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "Agent not deleted"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.vnf_manager_controller"
+  /VNFManager/disable:
+    put:
+      tags:
+      - "VNFManager"
+      summary: "Stop a VM and CNT monitoring agent"
+      operationId: "disable_agent_vnf"
+      parameters:
+      - in: "body"
+        name: "payload"
+        required: true
+        schema:
+          $ref: "#/definitions/delete_agent"
+      responses:
+        "200":
+          description: "Agent deleted correctly"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "Agent not deleted"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.vnf_manager_controller"
+  /VNFManager/enable:
+    put:
+      tags:
+      - "VNFManager"
+      summary: "Start a VM and CNT monitoring agent"
+      operationId: "enable_agent_vnf"
+      parameters:
+      - in: "body"
+        name: "payload"
+        required: true
+        schema:
+          $ref: "#/definitions/delete_agent"
+      responses:
+        "200":
+          description: "Agent deleted correctly"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "Agent not deleted"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.vnf_manager_controller"
+  /sensor/agents:
+    get:
+      tags:
+      - "sensor"
+      summary: "Get all agent deployed"
+      operationId: "get_all_agents"
+      parameters:
+      - name: "path"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Agent correctly retreived"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "agent not found"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.sensor_controller"
+  /sensor/collected:
+    get:
+      tags:
+      - "sensor"
+      summary: "Get all data of an agent"
+      operationId: "get_all_data"
+      parameters:
+      - name: "path"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Data correctly retreived"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "data not found"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.sensor_controller"
+  /sensor/configuration:
+    post:
+      tags:
+      - "sensor"
+      summary: "Add database et data flow configuration"
+      operationId: "add_db_config"
+      parameters:
+      - in: "body"
+        name: "payload"
+        required: true
+        schema:
+          $ref: "#/definitions/db_model"
+      responses:
+        "200":
+          description: "Add DATABASE CONFIGURATION"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "data not found"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.sensor_controller"
+  /sensor/notification:
+    post:
+      tags:
+      - "sensor"
+      summary: "get notification about new data"
+      operationId: "new_information_stored"
+      parameters:
+      - in: "body"
+        name: "payload"
+        required: true
+        schema:
+          $ref: "#/definitions/notification_model"
+      responses:
+        "200":
+          description: "information sent"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.sensor_controller"
+  /sensor/symptome:
+    post:
+      tags:
+      - "sensor"
+      summary: "send new symptome"
+      operationId: "send_new_symptome"
+      parameters:
+      - in: "body"
+        name: "payload"
+        required: true
+        schema:
+          $ref: "#/definitions/symptome"
+      responses:
+        "200":
+          description: "Agent added correctly"
+        "400":
+          description: "Bad JSON request"
+        "403":
+          description: "Forbidden"
+        "404":
+          description: "Agent not added"
+        "500":
+          description: "Can't communicate with the server"
+      x-swagger-router-controller: "swagger_server.controllers.sensor_controller"
+definitions:
+  osgi_host:
+    required:
+    - "host ip"
+    - "host port"
+    - "type"
+    - "username"
+    properties:
+      username:
+        type: "string"
+        description: "ssh username host"
+      host ip:
+        type: "string"
+        example: "127.0.0.1"
+        description: "ip address of monitored VM"
+      password:
+        type: "string"
+        description: "password to connect the host or use public key"
+        default: ""
+      type:
+        type: "string"
+        example: "OSGI"
+        description: "Type of virtualisation container in this case OSGI"
+        default: "OSGI"
+      host port:
+        type: "string"
+        example: "8080"
+        description: "agent port"
+        default: "8080"
+  db_model:
+    properties:
+      hdfs:
+        type: "object"
+        description: "required informations to get data from hdfs"
+        allOf:
+        - $ref: "#/definitions/db_hadoop"
+      alerts:
+        type: "object"
+        description: "required informations to send alerts to flume"
+        allOf:
+        - $ref: "#/definitions/db_model_alert"
+      data:
+        type: "object"
+        description: "required informations to send data to flume"
+        allOf:
+        - $ref: "#/definitions/db_model_data"
+  update_model_vnf:
+    properties:
+      access_host:
+        type: "object"
+        description: "required informations to access  host "
+        allOf:
+        - $ref: "#/definitions/host"
+      metrics:
+        type: "object"
+        description: "required metrics to custom agent "
+        allOf:
+        - $ref: "#/definitions/metrics_system"
+      agent contrainte:
+        type: "object"
+        description: "required metrics to custom agent "
+        allOf:
+        - $ref: "#/definitions/metrics_vnf_contrainte"
+  delete_agent:
+    required:
+    - "host ip"
+    - "type"
+    - "username"
+    - "password"
+    properties:
+      username:
+        type: "string"
+        example: "ubutnu"
+        description: " username of monitored VM"
+      host ip:
+        type: "string"
+        example: "127.0.0.1"
+        description: "ip address of monitored VM"
+      type:
+        type: "string"
+        description: "type of virtualisation container"
+        default: "VM/CNT"
+      password:
+        type: "string"
+        description: "password to connect the host or use public key"
+        default: ""
+  notification_model:
+    required:
+    - "ip"
+    - "CPU"
+    - "type"
+    - "RAM"
+    - "id"
+    properties:
+      ip:
+        type: "string"
+        example: "127.0.0.1"
+        description: "ip of agent"
+      CPU:
+        type: "string"
+        example: "GOOD"
+        description: "Symptome of cpu"
+      type:
+        type: "string"
+        description: "type of virtualisation container"
+        default: "VM/CNT"
+      RAM:
+        type: "string"
+        description: "Symptome of ram"
+        default: ""
+      id:
+        type: "string"
+        description: "id of agent"
+        default: ""
+  agent:
+    required:
+    - "activated"
+    - "type"
+    properties:
+      refresh_period:
+        type: "integer"
+        example: 10
+        description: "period of time to collect data for passive monitoring"
+      activated:
+        type: "boolean"
+        description: "activate monitoring"
+        default: true
+      type:
+        type: "string"
+        example: "passive/active"
+        description: "monitoring type PASSIVE/ACTIVE"
+        default: "PASSIVE"
+  db_model_alert:
+    required:
+    - "flume_url"
+    - "port"
+    properties:
+      flume_url:
+        type: "string"
+        description: "flume http link"
+        default: "true"
+      port:
+        type: "string"
+        description: "flume http port"
+        default: "false"
+  host:
+    required:
+    - "host ip"
+    - "host port"
+    - "server ip"
+    - "server port"
+    - "type"
+    - "username"
+    properties:
+      username:
+        type: "string"
+        description: "web console username"
+      host port:
+        type: "string"
+        example: "8080"
+        description: " agent port"
+        default: "8080"
+      server ip:
+        type: "string"
+        example: "127.0.0.1"
+        description: "ip address of monitoring manager"
+      host ip:
+        type: "string"
+        example: "127.0.0.1"
+        description: "ip address of monitored VM"
+      password:
+        type: "string"
+        description: "password to connect the host or use public key"
+        default: ""
+      type:
+        type: "string"
+        description: "OSGI"
+        default: "osgi"
+      server port:
+        type: "string"
+        example: "5000"
+        description: "monitoring manager port"
+        default: "5000"
+  metrics_system:
+    required:
+    - "cpu"
+    - "mem"
+    properties:
+      mem:
+        type: "boolean"
+        description: "monitoring RAM consumption"
+        default: true
+      cpu:
+        type: "boolean"
+        description: "monitoring CPU consumption"
+        default: true
+  osgi_model_jvm:
+    properties:
+      access_host:
+        type: "object"
+        description: "required informations to access  host "
+        allOf:
+        - $ref: "#/definitions/host"
+      agent contrainte:
+        type: "object"
+        description: "required metrics to custom agent "
+        allOf:
+        - $ref: "#/definitions/metrics_anf_contrainte"
+      agent:
+        type: "object"
+        description: " required informations to deploy agent"
+        allOf:
+        - $ref: "#/definitions/agent"
+      database:
+        type: "object"
+        description: "required informations for data storing  "
+        allOf:
+        - $ref: "#/definitions/db_model"
+  agent_model_cst:
+    required:
+    - "agent path"
+    - "host ip"
+    - "host port"
+    - "type"
+    - "username"
+    properties:
+      username:
+        type: "string"
+        description: "ssh username"
+      host port:
+        type: "string"
+        example: "5000"
+        description: " agent port"
+        default: "5000"
+      agent path:
+        type: "string"
+        example: "/path/to/agent/"
+        description: "Absolute path to agent"
+      refresh_period:
+        type: "integer"
+        example: 10
+        description: "period of time to collect data"
+      host ip:
+        type: "string"
+        example: "127.0.0.1"
+        description: "ip address of monitored VM"
+      password:
+        type: "string"
+        description: "password to connect the host or use public key"
+        default: ""
+      type:
+        type: "string"
+        example: "vm/cnt"
+        description: " host type VM/CNT"
+        default: "VM"
+  admin_model_system:
+    properties:
+      access_host:
+        type: "object"
+        description: "required informations to access  host "
+        allOf:
+        - $ref: "#/definitions/host"
+      metrics:
+        type: "object"
+        description: "required metrics to custom agent "
+        allOf:
+        - $ref: "#/definitions/metrics_system"
+      agent contrainte:
+        type: "object"
+        description: "required metrics to custom agent "
+        allOf:
+        - $ref: "#/definitions/metrics_vnf_contrainte"
+      agent:
+        type: "object"
+        description: " required informations to deploy agent"
+        allOf:
+        - $ref: "#/definitions/agent"
+      database:
+        type: "object"
+        description: "required informations for data storing  "
+        allOf:
+        - $ref: "#/definitions/db_model"
+  metrics_vnf_contrainte:
+    required:
+    - "cpu"
+    - "mem"
+    properties:
+      mem:
+        type: "number"
+        description: "monitoring  RAM contrainte"
+      cpu:
+        type: "number"
+        description: "monitoring cpu  contrainte"
+  symptome:
+    required:
+    - "symptome"
+    properties:
+      symptome:
+        type: "string"
+        description: "generated symptome"
+        default: "false"
+  metrics_anf_contrainte:
+    required:
+    - "cpu"
+    - "mem"
+    properties:
+      mem:
+        type: "number"
+        description: "monitoring ram contrainte"
+      cpu:
+        type: "number"
+        description: "monitoring cpu  contrainte"
+  db_hadoop:
+    required:
+    - "hdfs_port"
+    - "hdfs_url"
+    properties:
+      hdfs_port:
+        type: "string"
+        description: "hdfs http port"
+        default: "false"
+      hdfs_url:
+        type: "string"
+        description: "hdfs http link"
+        default: "true"
+  db_model_data:
+    required:
+    - "flume_url"
+    - "port"
+    properties:
+      flume_url:
+        type: "string"
+        description: "flume http link"
+        default: "true"
+      port:
+        type: "string"
+        description: "flume http port"
+        default: "false"
+responses:
+  MaskError:
+    description: "When any error occurs on mask"
+  ParseError:
+    description: "When a mask can't be parsed"
