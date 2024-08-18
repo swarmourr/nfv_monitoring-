@@ -1,5 +1,5 @@
 # nfv_monitoring-
-this project provides a monitoring based-agent approche to monitor virtualised and applicative network functions.
+This project provides a monitoring based-agent approche to monitor virtualised and applicative network functions.
 ## - General architecture:  
 ![alt text](https://github.com/swarmourr/nfv_monitoring-/blob/master/Screenshot_2020-06-15%20RAPPORT-PFE-draft-Version-finale%20pdf.png?raw=true)
 ## - Monitoring approche:  
